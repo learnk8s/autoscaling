@@ -9,7 +9,7 @@ import (
 const port = 8080
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello world")
+	fmt.Fprintln(w, "Hello world")
 	log.Printf("Handling request from %v\n", r.RemoteAddr)
 }
 
