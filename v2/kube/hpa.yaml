@@ -10,9 +10,10 @@ spec:
   minReplicas: 1
   maxReplicas: 5
   metrics:
-    - type: Resource
-      resource:
-        name: cpu
+    - type: Pods
+      pods:
+        metric:
+          name: queries_per_second
         target:
-          type: Utilization
-          averageUtilization: 50
+          type: AverageValue
+          averageValue: 10
