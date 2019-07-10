@@ -1,5 +1,6 @@
-FROM golang:1.12-alpine AS build
+FROM golang:1.12-stretch AS build
 COPY main.go .
+RUN go get github.com/prometheus/client_golang/prometheus
 RUN CGO_ENABLED=0 go build -o /main main.go
 
 FROM scratch
