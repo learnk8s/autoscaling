@@ -13,24 +13,19 @@ const port = 8080
 
 var counter = promauto.NewCounter(
 	prometheus.CounterOpts{
-		Name: "http_requests_total",
-		Help: "Number of HTTP requests processed.",
+		Name: "autoscaling_http_requests_total",
+		Help: "Number of HTTP requests received.",
 	},
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Hello world")
-	log.Printf("Handling request from %v\n", r.RemoteAddr)
+	fmt.Fprintln(w, "Hello World")
 	counter.Inc()
 }
 
 func main() {
-	http.Handle("/metrics", promhttp.Handler())
 	http.HandleFunc("/", handler)
-
-	fmt.Printf("> App listening on http://localhost:%v\n", port)
-	err := http.ListenAndServe(fmt.Sprintf(":%v", port), nil)
-	if err != nil {
-		panic(err)
-	}
+	http.Handle("/metrics", promhttp.Handler())
+	log.Printf("App listening on port %v\n", port)
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", port), nil))
 }

@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: web
+  name: autoscaling
 spec:
   selector:
-    app: web
+    app: autoscaling
   ports:
     - port: 80
       targetPort: 8080
@@ -13,19 +13,19 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web
+  name: autoscaling
   labels:
-    app: web
+    app: autoscaling
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: web
+      app: autoscaling
   template:
     metadata:
       labels:
-        app: web
+        app: autoscaling
     spec:
       containers:
         - image: learnk8s/autoscaling:v2
-          name: web
+          name: autoscaling
