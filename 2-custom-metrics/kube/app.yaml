@@ -6,7 +6,7 @@ spec:
   selector:
     app: autoscaling
   ports:
-    - port: 80
+    - port: 8080
       targetPort: 8080
   type: LoadBalancer
 ---
@@ -29,3 +29,6 @@ spec:
       containers:
         - image: learnk8s/autoscaling:v2
           name: autoscaling
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080

@@ -25,11 +25,8 @@ spec:
         app: autoscaling
     spec:
       containers:
-        - image: learnk8s/autoscaling:v1
+        - image: learnk8s/autoscaling:0-base
           name: autoscaling
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
-          resources:
-            requests:
-              cpu: 10m
