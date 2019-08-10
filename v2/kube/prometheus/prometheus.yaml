@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: prometheus
+  namespace: custom-metrics
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -29,17 +30,18 @@ apiVersion: v1
 kind: Service
 metadata:
   name: prometheus
+  namespace: custom-metrics
 spec:
   selector:
     app: prometheus
   ports:
     - port: 9090
-      targetPort: 9090
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prometheus
+  namespace: custom-metrics
 spec:
   selector:
     matchLabels:
@@ -53,7 +55,6 @@ spec:
       containers:
         - image: prom/prometheus:v2.11.1
           name: prometheus
-          imagePullPolicy: Always
           ports:
             - containerPort: 9090
           args:
@@ -71,5 +72,6 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: prometheus-config
+  namespace: custom-metrics
 data:
   prometheus.yml: ""
