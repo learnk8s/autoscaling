@@ -27,9 +27,10 @@ spec:
       containers:
         - image: learnk8s/autoscaling:v1
           name: autoscaling
-          imagePullPolicy: Always
           ports:
             - containerPort: 8080
+          imagePullPolicy: Always
+          # This is necessary for autoscaling based on CPU utilisation
           resources:
             requests:
               cpu: 10m

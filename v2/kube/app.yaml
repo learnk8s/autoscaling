@@ -29,6 +29,6 @@ spec:
       containers:
         - image: learnk8s/autoscaling:v2
           name: autoscaling
-          imagePullPolicy: Always
           ports:
             - containerPort: 8080
+          imagePullPolicy: Always
