@@ -13,7 +13,7 @@ const port = 8080
 
 var counter = promauto.NewCounter(
 	prometheus.CounterOpts{
-		Name: "autoscaling_http_requests_total",
+		Name: "myapp_http_requests_total",
 		Help: "Number of HTTP requests received.",
 	},
 )
