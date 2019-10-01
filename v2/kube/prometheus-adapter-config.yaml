@@ -1,0 +1,16 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: prometheus-adapter-config
+  namespace: metrics
+data:
+  config.yaml: |
+    rules:
+      - name:
+          as: myapp_http_requests_per_second
+        resources:
+          overrides:
+            kubernetes_pod: {resource: "pod"}
+            kubernetes_namespace: {resource: "namespace"}
+        metricsQuery: sum(rate(myapp_http_requests_total{<<.LabelMatchers>>}[1m])) by (<<.GroupBy>>)
+        seriesQuery: myapp_http_requests_total
